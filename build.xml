@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- You may freely edit this file. See commented blocks below for -->
+<!-- some examples of how to customize the build. -->
+<!-- (If you delete it and reopen the project it will be recreated.) -->
+<project name="VOSpec" default="default" basedir="." xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:j2seproject2="http://www.netbeans.org/ns/j2se-project/2" xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
+    <description>Builds, tests, and runs VOSpec project.</description>
+    <import file="nbproject/build-impl.xml"/>
+
+    <property file="build.properties" />
+
+    <!--
+    /////////////////////////////////////////////////////////////
+    Clean Server side, delete files/directory coming from applet
+    /////////////////////////////////////////////////////////////
+    -->
+    <target name="clean" description="Clean deploy">
+        <delete dir="${basedir}/deploy/"/>
+        <delete dir="${basedir}/dist/"/>
+        <mkdir dir="${basedir}/dist/"/>
+        <delete dir="${basedir}/build/classes/"/>
+        <mkdir dir="${basedir}/build/classes/"/>
+    </target>
+
+
+    <!--
+    /////////////////////////////////////////////////////////////
+    Replace insthost and other settings to relative files
+    /////////////////////////////////////////////////////////////
+    -->
+
+    <!--
+    /////////////////////////////////////////////////////////////
+    LOCALHOST
+    /////////////////////////////////////////////////////////////
+    -->
+    <target name="replacePropLocal">
+        <echo>replacePropLocal</echo>
+        <delete dir="/tmp/vospec" />
+
+        <copy todir="/tmp/vospec">
+            <filterset>
+                <filter token="INSTALLATION_HOST" value="${installation.host.name.local}" />
+                <filter token="PORT" value="${installation.port.name.local}" />
+                <filter token="USER_HOME" value="${localuser.home}/vospec" />
+                <filter token="RMI_PORT" value="${rmi.port}" />
+                <filter token="SERVER_NAME" value="${serverName}" />
+            </filterset>
+            <fileset dir="./">
+                <include name="index.html" />
+                <include name="AioSpecServer" />
+            </fileset>
+        </copy>
+
+        <copy todir="/tmp/vospec/conf">
+            <filterset>
+                <filter token="INSTALLATION_HOST" value="${installation.host.name.local}" />
+                <filter token="PORT" value="${installation.port.name.local}" />
+                <filter token="USER_HOME" value="${localuser.home}/vospec" />
+                <filter token="RMI_PORT" value="${rmi.port}" />
+                <filter token="SERVER_NAME" value="${serverName}" />
+                <filter token="VERSION" value="${version}" />
+            </filterset>
+            <fileset dir="conf">
+                <include name="aioSpecEnvironmentDefs.xml" />
+            </fileset>
+        </copy>
+
+        <copy todir="/tmp/vospec/jsp">
+            <filterset>
+                <filter token="INSTALLATION_HOST" value="${installation.host.name.local}" />
+                <filter token="PORT" value="${installation.port.name.local}" />
+                <filter token="USER_HOME" value="${localuser.home}/vospec" />
+                <filter token="RMI_PORT" value="${rmi.port}" />
+                <filter token="SERVER_NAME" value="${serverName}" />
+            </filterset>
+            <fileset dir="jsp">
+                <include name="openVOSpec.jsp" />
+                <include name="openSpectrum.jsp" />
+            </fileset>
+        </copy>
+
+        <copy todir="/tmp/vospec/webstart">
+            <filterset>
+                <filter token="INSTALLATION_HOST" value="${installation.host.name.local}" />
+                <filter token="PORT" value="${installation.port.name.local}" />
+            </filterset>
+            <fileset dir="webstart">
+                <include name="VOSpec.jnlp" />
+            </fileset>
+        </copy>
+
+        <copy todir="/tmp/vospec/VOSpecAccess">
+            <filterset>
+                <filter token="INSTALLATION_HOST" value="${installation.host.name.local}" />
+                <filter token="PORT" value="${installation.port.name.local}" />
+            </filterset>
+            <fileset dir="VOSpecAccess">
+                <include name="index.html" />
+            </fileset>
+        </copy>
+
+        <delete dir="${localuser.home}/vospec"></delete>
+
+    </target>
+
+    <!--
+    /////////////////////////////////////////////////////////////
+    ESAVO02
+    /////////////////////////////////////////////////////////////
+    -->
+    <target name="replacePropDev">
+        <delete dir="/tmp/vospec" />
+
+        <copy todir="/tmp/vospec">
+            <filterset>
+                <filter token="INSTALLATION_HOST" value="${installation.host.name.dev}" />
+                <filter token="PORT" value="${installation.port.name.dev}" />
+                <filter token="USER_HOME" value="${remoteuser.home}/vospec" />
+                <filter token="RMI_PORT" value="${rmi.port}" />
+                <filter token="SERVER_NAME" value="${serverName}" />
+            </filterset>
+            <fileset dir="./">
+                <include name="index.html" />
+                <include name="AioSpecServer" />
+            </fileset>
+        </copy>
+
+        <copy todir="/tmp/vospec/conf">
+            <filterset>
+                <filter token="INSTALLATION_HOST" value="${installation.host.name.dev}" />
+                <filter token="PORT" value="${installation.port.name.dev}" />
+                <filter token="USER_HOME" value="${remoteuser.home}/vospec" />
+                <filter token="RMI_PORT" value="${rmi.port}" />
+                <filter token="SERVER_NAME" value="${serverName}" />
+                <filter token="VERSION" value="${version}" />
+            </filterset>
+            <fileset dir="conf">
+                <include name="aioSpecEnvironmentDefs.xml" />
+            </fileset>
+        </copy>
+
+        <copy todir="/tmp/vospec/jsp">
+            <filterset>
+                <filter token="INSTALLATION_HOST" value="${installation.host.name.dev}" />
+                <filter token="PORT" value="${installation.port.name.dev}" />
+                <filter token="USER_HOME" value="${remoteuser.home}/vospec" />
+                <filter token="RMI_PORT" value="${rmi.port}" />
+                <filter token="SERVER_NAME" value="${serverName}" />
+            </filterset>
+            <fileset dir="jsp">
+                <include name="openVOSpec.jsp" />
+                <include name="openSpectrum.jsp" />
+            </fileset>
+        </copy>
+
+        <copy todir="/tmp/vospec/webstart">
+            <filterset>
+                <filter token="INSTALLATION_HOST" value="${installation.host.name.dev}" />
+                <filter token="PORT" value="${installation.port.name.dev}" />
+            </filterset>
+            <fileset dir="webstart">
+                <include name="VOSpec.jnlp" />
+            </fileset>
+        </copy>
+
+        <copy todir="/tmp/vospec/VOSpecAccess">
+            <filterset>
+                 <filter token="INSTALLATION_HOST" value="${installation.host.name.dev}" />
+                 <filter token="PORT" value="${installation.port.name.dev}" />
+            </filterset>
+            <fileset dir="VOSpecAccess">
+                <include name="index.html" />
+            </fileset>
+        </copy>
+
+        <delete dir="${remoteuser.home}/vospec"></delete>
+    </target>
+
+    <!--
+    /////////////////////////////////////////////////////////////
+    ESAVO01
+    /////////////////////////////////////////////////////////////
+    -->
+    <target name="replacePropOp">
+        <delete dir="/tmp/vospec" />
+
+        <copy todir="/tmp/vospec">
+            <filterset>
+                <filter token="INSTALLATION_HOST" value="${installation.host.name.op}" />
+                <filter token="PORT" value="${installation.port.name.op}" />
+                <filter token="USER_HOME" value="${remoteuser.home}/vospec" />
+                <filter token="RMI_PORT" value="${rmi.port}" />
+                <filter token="SERVER_NAME" value="${serverName}" />
+            </filterset>
+            <fileset dir="./">
+                <include name="index.html" />
+                <include name="AioSpecServer" />
+            </fileset>
+        </copy>
+
+        <copy todir="/tmp/vospec/conf">
+            <filterset>
+                <filter token="INSTALLATION_HOST" value="${installation.host.name.op}" />
+                <filter token="PORT" value="${installation.port.name.op}" />
+                <filter token="USER_HOME" value="${remoteuser.home}/vospec" />
+                <filter token="RMI_PORT" value="${rmi.port}" />
+                <filter token="SERVER_NAME" value="${serverName}" />
+                <filter token="VERSION" value="${version}" />
+            </filterset>
+            <fileset dir="conf">
+                <include name="aioSpecEnvironmentDefs.xml" />
+            </fileset>
+        </copy>
+
+        <copy todir="/tmp/vospec/jsp">
+            <filterset>
+                <filter token="INSTALLATION_HOST" value="${installation.host.name.op}" />
+                <filter token="PORT" value="${installation.port.name.op}" />
+                <filter token="USER_HOME" value="${remoteuser.home}/vospec" />
+                <filter token="RMI_PORT" value="${rmi.port}" />
+                <filter token="SERVER_NAME" value="${serverName}" />
+            </filterset>
+            <fileset dir="jsp">
+                <include name="openVOSpec.jsp" />
+                <include name="openSpectrum.jsp" />
+            </fileset>
+        </copy>
+
+        <copy todir="/tmp/vospec/webstart">
+            <filterset>
+                <filter token="INSTALLATION_HOST" value="${installation.host.name.op}" />
+                <filter token="PORT" value="${installation.port.name.op}" />
+            </filterset>
+            <fileset dir="webstart">
+                <include name="VOSpec.jnlp" />
+            </fileset>
+        </copy>
+
+        <copy todir="/tmp/vospec/VOSpecAccess">
+            <filterset>
+                <filter token="INSTALLATION_HOST" value="${installation.host.name.op}" />
+                 <filter token="PORT" value="${installation.port.name.op}" />
+            </filterset>
+            <fileset dir="VOSpecAccess">
+                <include name="index.html" />
+            </fileset>
+        </copy>
+
+        <delete dir="${remoteuser.home}/vospec"></delete>
+    </target>
+
+    <!--
+    /////////////////////////////////////////////////////////////
+    Sign Jars
+    /////////////////////////////////////////////////////////////
+    -->
+
+
+    <target name="sign_jars" description="Sign jars">
+        <signjar jar="${basedir}/lib/unsigned/esavo-units-parser-1.2.jar" signedjar="${basedir}/lib/esavo-units-parser-1.2.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/org.jar" signedjar="${basedir}/lib/org.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/plastic.jar" signedjar="${basedir}/lib/plastic.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/swing-layout-1.0.jar" signedjar="${basedir}//lib/swing-layout-1.0.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/ptolemy.plot.jar" signedjar="${basedir}/lib/ptolemy.plot.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/Jama-1.0.1.jar" signedjar="${basedir}/lib/Jama-1.0.1.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/nom.jar" signedjar="${basedir}/lib/nom.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/dist/VOSpec_Subversion.jar" signedjar="${basedir}/dist/VOSpec_Subversion.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/SEDLib_1.2_run.jar" signedjar="${basedir}/lib/SEDLib_1.2_run.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/jh.jar" signedjar="${basedir}/lib/jh.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/soap.jar" signedjar="${basedir}/lib/soap.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/cds-savot-3.0.jar" signedjar="${basedir}/lib/cds-savot-3.0.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/regionMatcher.jar" signedjar="${basedir}/lib/regionMatcher.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/swingx-0.9.5.jar" signedjar="${basedir}/lib/swingx-0.9.5.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <!--
+             VOEspace libraries, decomment to add VOEspace again, remember to add them in index.html as well, to lib directory and to Netbeans environment
+        <signjar jar="${basedir}/lib/activation-1.1.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/axiom-api-1.2.4.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/axiom-impl-1.2.4.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/axis2-adb-1.2.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/axis2-kernel-1.2.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/bcprov.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/cog-jglobus-1.2-060802.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/commons-codec-1.3.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/commons-httpclient-3.0.1.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/commons-logging-1.1.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/cryptix32.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/cryptix-asn1.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/puretls.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/stax-api-1.0.1.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/VOEspaceService-client.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/wsdl4j-1.6.2.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/wstx-asl-3.2.1.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        <signjar jar="${basedir}/lib/XmlSchema-1.3.1.jar"  keystore="Keystore.VOSpec" alias="VOSpec" storepass="VOSpec_ES" />
+        -->
+        <signjar jar="${basedir}/lib/unsigned/jsamp-1.0.jar" signedjar="${basedir}/lib/jsamp-1.0.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/absi-cl-samp-module-0.2.2.jar" signedjar="${basedir}/lib/absi-cl-samp-module-0.2.2.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/stil.jar" signedjar="${basedir}/lib/stil.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+
+
+    </target>
+
+
+    <!--
+    /////////////////////////////////////////////////////////////
+    Sign Jars partial
+    /////////////////////////////////////////////////////////////
+    -->
+
+
+    <target name="sign_jars_partial" description="Sign jars">
+        <signjar jar="${basedir}/lib/unsigned/esavo-units-parser-1.2.jar" signedjar="${basedir}/lib/esavo-units-parser-1.2.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/org.jar" signedjar="${basedir}/lib/org.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/plastic.jar" signedjar="${basedir}/lib/plastic.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/swing-layout-1.0.jar" signedjar="${basedir}//lib/swing-layout-1.0.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/ptolemy.plot.jar" signedjar="${basedir}/lib/ptolemy.plot.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/Jama-1.0.1.jar" signedjar="${basedir}/lib/Jama-1.0.1.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/nom.jar" signedjar="${basedir}/lib/nom.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/SEDLib_1.2_run.jar" signedjar="${basedir}/lib/SEDLib_1.2_run.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/jh.jar" signedjar="${basedir}/lib/jh.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/soap.jar" signedjar="${basedir}/lib/soap.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/cds-savot-3.0.jar" signedjar="${basedir}/lib/cds-savot-3.0.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/regionMatcher.jar" signedjar="${basedir}/lib/regionMatcher.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/swingx-0.9.5.jar" signedjar="${basedir}/lib/swingx-0.9.5.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/jsamp-1.0.jar" signedjar="${basedir}/lib/jsamp-1.0.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/absi-cl-samp-module-0.2.2.jar" signedjar="${basedir}/lib/absi-cl-samp-module-0.2.2.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+        <signjar jar="${basedir}/lib/unsigned/stil.jar" signedjar="${basedir}/lib/stil.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+
+
+    </target>
+
+
+
+
+    <!--
+    ////////////////////////////////////////////////////////////////////////////////
+    Webstart task Local installation - be sure to have vospec installed in localhost
+    ////////////////////////////////////////////////////////////////////////////////
+    -->
+    <target name="webstartLocal" depends="deployWAR_Local" description="Install jars in webapps/webstart">
+        <delete dir="${localuser.home}/webstart"></delete>
+        <mkdir dir="${localuser.home}/webstart"></mkdir>
+
+        <copy todir="${localuser.home}/webstart">
+            <fileset dir="${basedir}/lib/">
+            </fileset>
+        </copy>
+
+        <copy todir="${localuser.home}/webstart">
+            <fileset dir="/tmp/vospec/webstart/">
+                <include name="VOSpec.jnlp"/>
+            </fileset>
+        </copy>
+
+        <echo message="From ${basedir}/webstart"/>
+    </target>
+
+    <!--
+    /////////////////////////////////////////////////////////////
+    Webstart task Development installation
+    /////////////////////////////////////////////////////////////
+    -->
+
+
+    <target name="webstartDev" depends="deployWAR_Esavo02" description="Install jars in webapps/webstart">
+
+        <input message="Please enter the deploy.pass : " addproperty="deploy.pass"/>
+
+        <scp todir="voops:${deploy.pass}@esavo02.esac.esa.int:/home/voops/webapps/webstart">
+            <fileset dir="/tmp/vospec/webstart/">
+                <include name="VOSpec.jnlp"/>
+            </fileset>
+        </scp>
+
+        <scp todir="voops:${deploy.pass}@esavo02.esac.esa.int:/home/voops/webapps/webstart">
+            <fileset dir="${basedir}/lib/"/>
+        </scp>
+
+    </target>
+
+    <!--
+    /////////////////////////////////////////////////////////////
+    Webstart task  Development installation
+    /////////////////////////////////////////////////////////////
+    -->
+    <target name="webstartOp" depends="deployWAR_Esavo01" description="Install jars in webapps/webstart">
+
+        <input message="Please enter the deploy.pass : " addproperty="deploy.pass"/>
+
+        <scp todir="voops:${deploy.pass}@esavo01.esac.esa.int:/home/voops/webapps/webstart">
+            <fileset dir="/tmp/vospec/webstart/">
+                <include name="VOSpec.jnlp"/>
+            </fileset>
+        </scp>
+
+        <scp todir="voops:${deploy.pass}@esavo01.esac.esa.int:/home/voops/webapps/webstart">
+            <fileset dir="${basedir}/lib/"/>
+        </scp>
+
+    </target>
+
+    <!--
+    /////////////////////////////////////////////////////////////
+    Create stub
+    /////////////////////////////////////////////////////////////
+
+    <target name="compileWithRMIC" depends="clean,deps-jar,-pre-pre-compile,-pre-compile,-do-compile,-post-compile">
+        <rmic classname="esavo.vospec.rmi.AioSpecServer" classpath="${basedir}/lib/" base="${basedir}/build/classes"  />
+        <echo message="Stub created"/>
+    </target>
+    -->
+
+    <!--
+    /////////////////////////////////////////////////////////////
+    Start RMI Registry
+    /////////////////////////////////////////////////////////////
+
+    <target name="startRegistry" depends="clean,compileWithRMIC,jar">
+        <exec executable="rmiregistry" spawn="true">
+            <arg value="-J-Djava.rmi.server.codebase=file:${basedir}/dist/VOSpec_Subversion.jar" />
+            <arg value="1099"/>
+        </exec>
+        <echo message="RMI Registry Started"/>
+    </target>
+    -->
+
+    <target name="deployWAR_Local" depends="clean,compile,replacePropLocal,jar,sign_jars,standalone_jar,WAR">
+    </target>
+
+    <target name="Install_Local" depends="deployWAR_Local" description="Install war local">
+        <copy file="${basedir}/deploy/vospec.war" todir="${localuser.home}"/>
+    </target>
+
+    <target name="deployWAR_Esavo02" depends="clean,compile,replacePropDev,jar,sign_jars,standalone_jar,WAR">
+    </target>
+
+    <target name="Install_Esavo02" depends="deployWAR_Esavo02" description="Install war remotly">
+
+        <input message="Please enter the deploy.pass : " addproperty="deploy.pass"/>
+
+        <scp file="${basedir}/deploy/vospec.war" todir="voops:${deploy.pass}@esavo02.esac.esa.int:/home/voops/webapps/"/>
+
+    </target>
+
+    <target name="deployWAR_Esavo01" depends="clean,compile,replacePropOp,jar,sign_jars,standalone_jar,WAR">
+    </target>
+
+    <target name="Install_Esavo01" depends="deployWAR_Esavo01" description="Install war remotly">
+
+        <input message="Please enter the deploy.pass : " addproperty="deploy.pass"/>
+
+        <scp file="${basedir}/deploy/vospec.war" todir="voops:${deploy.pass}@esavo01.esac.esa.int:/home/voops/webapps/"/>
+
+    </target>
+
+
+
+    <!--
+    /////////////////////////////////////////////////////////////
+    Deploy VOSpec
+    /////////////////////////////////////////////////////////////
+    -->
+    <target name="WAR">
+        <mkdir dir="${basedir}/deploy"/>
+        <delete file="${basedir}/lib/VOSpec_Subversion.jar"></delete>
+
+        <copy todir="${basedir}/lib/">
+            <fileset dir="${basedir}/dist/">
+                <include name="VOSpec_Subversion.jar"/>
+            </fileset>
+        </copy>
+
+<!--
+        <copy todir="${basedir}/images/">
+            <fileset dir="${basedir}/src/esavo/vospec/images">
+            </fileset>
+        </copy>
+-->
+
+        <war destfile="${basedir}/deploy/vospec.war" webxml="${basedir}/web.xml">
+            <fileset dir="${basedir}">
+                <exclude name="nbproject/**"/>
+                <exclude name="deploy/**"/>
+                <exclude name="src/**"/>
+                <exclude name="jars/**"/>
+                <exclude name="dist/**"/>
+                <exclude name="build/**"/>
+                <exclude name="conf/aioSpecEnvironmentDefs.xml"/>
+                <exclude name="build.xml"/>
+                <exclude name="build.properties"/>
+                <exclude name="index.html"/>
+                <exclude name="verisign.p12"/>
+            </fileset>
+
+            <fileset dir="/tmp/vospec">
+            </fileset>
+        </war>
+    </target>
+
+
+
+
+    <target name="standalone_jar">
+        <jar jarfile="standalone/VOSpec_${version}.jar" duplicate="preserve">
+            <zipfileset src="dist/VOSpec_Subversion.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/esavo-units-parser-1.2.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/org.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/plastic.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/swing-layout-1.0.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/ptolemy.plot.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/Jama-1.0.1.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/SEDLib_1.2_run.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/nom.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/jh.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/soap.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/cds-savot-3.0.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/regionMatcher.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/swingx-0.9.5.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/jsamp-1.0.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/absi-cl-samp-module-0.2.2.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/stil.jar" excludes="META-INF/*" />
+            <manifest>
+                <attribute name="Main-Class" value="esavo.vospec.main.AioSpecToolDetached"/>
+            </manifest>
+        </jar>
+
+        <signjar jar="${basedir}/standalone/VOSpec_${version}.jar" signedjar="${basedir}/standalone/VOSpec_${version}.jar" keystore="${cert.keystore}" alias="${cert.alias}" storepass="${cert.password}"/>
+
+
+    </target>
+
+
+
+</project>

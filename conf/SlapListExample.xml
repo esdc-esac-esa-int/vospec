@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE VOTABLE SYSTEM "http://us-vo.org/xml/VOTable.dtd">
+<VOTABLE version="1.0">
+<RESOURCE type="results">
+<DESCRIPTION>
+Simple Line Access Data Service
+</DESCRIPTION>
+<INFO name="QUERY_STATUS" value="OK" />
+<TABLE>
+<FIELD ID="Title" ucd="VOX:Image_Title" datatype="char" arraysize="*"/>
+<FIELD ID="URL" ucd="DATA_LINK" datatype="char" arraysize="*"/>
+<DATA>
+<TABLEDATA>
+<TR>
+<TD>
+IASD
+</TD>
+<TD>
+<![CDATA[http://esavo.esac.esa.int/slap/jsp/slapBeta.jsp?]]>
+</TD>
+</TR>
+<TR>
+<TD>
+VUV-LERMA-LUTH
+</TD>
+<TD>
+<![CDATA[http://linelists.obspm.fr/transitions.php?base=molat&]]>
+</TD>
+</TR>
+<TR>
+<TD>
+NIST ATOMIC SPECTRA
+</TD>
+<TD>
+<![CDATA[http://physics.nist.gov/cgi-bin/ASD/slap.pl?]]>
+</TD>
+</TR>
+<TR>
+<TD>
+CIELO SLAP
+</TD>
+<TD>
+<![CDATA[http://esavo02:8080/cieloslapToolKit/cieloslap.jsp?]]>
+</TD>
+</TR>
+<TR>
+<TD>
+CHIANTI SLAP
+</TD>
+<TD>
+<![CDATA[http://msslxv.mssl.ucl.ac.uk:8080/chianti_slap/DALToolKitServlet?]]>
+</TD>
+</TR>
+<TR>
+<TD>
+STSCI SLAP
+</TD>
+<TD>
+<![CDATA[http://archdev.stsci.edu/slap/search.php?]]>
+</TD>
+</TR>
+<TR>
+<TD>
+LERMA
+</TD>
+<TD>
+<![CDATA[http://linelists.obspm.fr/transitions.php?base=cdms_jpl_basecol&]]>
+</TD>
+</TR>
+</TABLEDATA>
+</DATA>
+</TABLE>
+</RESOURCE>
+</VOTABLE>

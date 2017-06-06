@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE toc PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp TOC Version 1.0//EN" "http://java.sun.com/products/javahelp/toc_1_0.dtd">
+<toc version="1.0">
+ <tocitem text="AnalysisToolsHelpFile">
+  <tocitem text="VOSpeculator" target="VOSpeculator" />
+  <tocitem text="Bisector" target="Bisector" />
+  <tocitem text="Equivalent Width" target="Equivalent_Width" />
+  <tocitem text="Statistics" target="Statistics" />
+  <tocitem text="Fitting Utilities">
+   <tocitem text="Fitting Utilities" target="Fitting_Utilities" />
+   <tocitem text="Best Fit" target="Best_Fit" />
+   <tocitem text="Polynomial Fitting" target="Polynomial_Fitting" />
+   <tocitem text="Black Body Fitting" target="Black_Body_Fitting" />
+   <tocitem text="Gaussian,Lorentzian,Voigth Fitting" target="Gaussian_Lorentzian_Voigth_Fitting" />
+   </tocitem>
+  <tocitem text="Filtering">
+   <tocitem text="Filters" target="Filters" />
+   <tocitem text="Kernel Filters" target="Kernel_Filters" />
+   <tocitem text="Adaptive Filters" target="Adaptive_Filters" />
+   <tocitem text="Wavelet Filters" target="Wavelet_Filters" />
+   </tocitem>
+  <tocitem text="Averaging Filters">
+   <tocitem text="Averaging Filters" target="Averaging_Filters" />
+   <tocitem text="Defined by input number of adjacent points" target="Defined_by_input_number_of_adjacent_points" />
+   <tocitem text="Defined by input number of subintervals" target="Defined_by_input_number_of_subintervals" />
+   </tocitem>
+  <tocitem text="Tuning">
+   <tocitem text="Tuning" target="Tuning" />
+   <tocitem text="Multivalued spectra averaging" target="Multivalued_spectra_averaging" />
+   <tocitem text="Re-binning" target="Re_binning" />
+   <tocitem text="Reject Zero and negative flux values" target="Reject_Zero_and_negative_flux_values" />
+   </tocitem>
+  <tocitem text="Mirroring">
+   <tocitem text="Mirroring" target="Mirroring" />
+   <tocitem text="Line Mirroring" target="Line_Mirroring" />
+   <tocitem text="Spectrum Mirroring" target="Spectrum_Mirroring" />
+   </tocitem>
+  <tocitem text="Flux">
+   <tocitem text="Flux" target="Flux" />
+   <tocitem text="Line Flux" target="Line_Flux" />
+   <tocitem text="Integrated Flux" target="Integrated_Flux" />
+   </tocitem>
+  </tocitem>
+</toc>

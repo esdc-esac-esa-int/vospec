@@ -1,0 +1,152 @@
+<VOTABLE version="1.1" xmlns="http://www.ivoa.net/xml/VOTable/v1.1" xmlns:ssa="http://www.ivoa.net/xml/DalSsap/v1.0" >
+  <RESOURCE>
+    <DESCRIPTION>Common Metadata for simple/advance query (must/should parameters)</DESCRIPTION>
+    
+    <PARAM name="INPUT:POS">
+        <DESCRIPTION> 	
+            Search Position in the form "ra,dec" where
+            ra and dec are given in decimal degrees in
+            the ICRS coordinate system. Example (10,41)
+        </DESCRIPTION>
+    </PARAM>
+    
+    <PARAM name="INPUT:SIZE">
+        <DESCRIPTION> 	
+            Size of search region in the RA and DEC coordinates (decimal degrees)
+        </DESCRIPTION>
+    </PARAM>
+
+    <PARAM name="INPUT:APERTURE">
+        <DESCRIPTION>
+            Used only for spectral extraction. The aperture is specified as a diameter in decimal degrees
+        </DESCRIPTION>
+    </PARAM>
+    
+    <PARAM name="INPUT:BAND">
+        <DESCRIPTION> 	
+            For a numerical bandpass the units are wavelength in vacuum in units of meters (1E-7/3E-6;source)
+        </DESCRIPTION>
+    </PARAM>
+    
+    <PARAM name="INPUT:COLLECTION">
+        <DESCRIPTION>
+            The IVOA identifier or "shorName" of a data collection as defined by the service, for example SDSS-DR2 or NRAO-VLA
+        </DESCRIPTION>
+    </PARAM>
+    
+    <PARAM name="INPUT:COMPRESS">
+        <DESCRIPTION>
+            If this flag is present, datasets returned may optionally be returned to the client in compressed form. Valid values are "true" and "false"
+        </DESCRIPTION>
+    </PARAM>
+    
+    <PARAM name="INPUT:CREATORDID">
+        <DESCRIPTION>
+            An IVOA dataset identifier, assigned at creation time by the creator of the parent data collection. Example: ivo://nrao.edu/via#1998s2/4992a
+        </DESCRIPTION>
+    </PARAM>
+    
+    <PARAM name="INPUT:FLUXCALIB">
+        <DESCRIPTION>
+            Specifies the minimum level of flux calibration for acceptable data. Possible values are "absolute", "relative" and "any" (the default)
+        </DESCRIPTION>
+    </PARAM>
+    
+     <PARAM name="INPUT:FORMAT">
+        <DESCRIPTION>
+            Requested format for the output table (all, compliant, native, graphic, votable, fits, xml, metadata)
+        </DESCRIPTION>
+    </PARAM>	
+    
+    <PARAM name="INPUT:MAXREC">
+        <DESCRIPTION>
+            The maximum number of records to be returned
+        </DESCRIPTION>
+    </PARAM>
+    
+    <PARAM name="INPUT:MTIME">
+        <DESCRIPTION>
+            Find only datasets modified, created or deleted in the given range of dates
+        </DESCRIPTION>
+    </PARAM>
+    
+    <PARAM name="INPUT:PUBDID">
+        <DESCRIPTION>
+            The IVOA publisher's dataset identifier, assigned by the publisher of a dataset
+        </DESCRIPTION>
+    </PARAM>
+    
+    <PARAM name="INPUT:REDSHIFT">
+        <DESCRIPTION>
+            A photometric (observed) redshift range. Example 1.2/3
+        </DESCRIPTION>
+    </PARAM>
+    
+    <PARAM name="INPUT:REDSHIFTL">
+        <DESCRIPTION>
+            REDSHIFTL
+        </DESCRIPTION>
+    </PARAM>
+
+    <PARAM name="INPUT:RUNID">
+        <DESCRIPTION>
+            Opaque string used to associate multiple service invocations in service logs, e.g. to identify them as all belonging to the same job or application.
+        </DESCRIPTION>
+    </PARAM>
+    
+    <PARAM name="INPUT:SNR">
+        <DESCRIPTION>
+            The minimum signal-to-noise ratio of a candidate dataset
+        </DESCRIPTION>
+    </PARAM>
+    
+    <PARAM name="INPUT:SPECRP">
+        <DESCRIPTION>
+            The minimum spectral resolution, specified as the spectral resolving power /d in dimensional units
+        </DESCRIPTION>
+    </PARAM>
+    
+    <PARAM name="INPUT:SPATRES">
+        <DESCRIPTION>
+            The minimum spatial resolution, specified in decimal degrees
+        </DESCRIPTION>
+    </PARAM>
+    
+    <PARAM name="INPUT:TARGETCLASS">
+        <DESCRIPTION>
+            Types of astronomical objects (star, galaxy, pulsar, PN, AGN, QSO, GRB
+        </DESCRIPTION>
+    </PARAM>
+    
+     <PARAM name="INPUT:TIME">
+        <DESCRIPTION> 	
+            the time coverage specified in range-list form.
+        </DESCRIPTION>
+    </PARAM>
+    
+    <PARAM name="INPUT:TIMERES">
+        <DESCRIPTION>
+            The minimum time resolution, specified in seconds.
+        </DESCRIPTION>
+    </PARAM>
+    
+     <PARAM name="INPUT:TOP">
+        <DESCRIPTION>
+            Limits the number of returned records in the query response table
+        </DESCRIPTION>
+    </PARAM>
+     
+    <PARAM name="INPUT:WAVECALIB">
+        <DESCRIPTION>
+            Specifies the minimum level of spectral coordinate calibration for acceptable data. Possible values are "absolute", "relative", "any" (the default)
+        </DESCRIPTION>
+    </PARAM>
+    
+    <PARAM name="INPUT:VARAMPL">
+        <DESCRIPTION>
+            The acceptable range of variability amplitude, specified as a single element open or closed range-list, with values in the range 0.0 to 1.0
+        </DESCRIPTION>
+    </PARAM>
+    
+</RESOURCE>
+</VOTABLE>

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE map PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Map Version 1.0//EN" "http://java.sun.com/products/javahelp/map_1_0.dtd">
+
+<map version="1.0">
+  <mapID target="VOSpeculator" url="analysistoolshelpfile_rtf/vospeculator.htm" />
+  <mapID target="Bisector" url="analysistoolshelpfile_rtf/bisector.htm" />
+  <mapID target="Equivalent_Width" url="analysistoolshelpfile_rtf/equivalent_width.htm" />
+  <mapID target="Statistics" url="analysistoolshelpfile_rtf/statistics.htm" />
+  <mapID target="Fitting_Utilities" url="analysistoolshelpfile_rtf/fitting_utilities.htm" />
+  <mapID target="Best_Fit" url="analysistoolshelpfile_rtf/best_fit.htm" />
+  <mapID target="Polynomial_Fitting" url="analysistoolshelpfile_rtf/polynomial_fitting.htm" />
+  <mapID target="Black_Body_Fitting" url="analysistoolshelpfile_rtf/black_body_fitting.htm" />
+  <mapID target="Gaussian_Lorentzian_Voigth_Fitting" url="analysistoolshelpfile_rtf/gaussian_lorentzian_voigth_fitting.htm" />
+  <mapID target="Filters" url="analysistoolshelpfile_rtf/filters.htm" />
+  <mapID target="Kernel_Filters" url="analysistoolshelpfile_rtf/kernel_filters.htm" />
+  <mapID target="Adaptive_Filters" url="analysistoolshelpfile_rtf/adaptive_filters.htm" />
+  <mapID target="Wavelet_Filters" url="analysistoolshelpfile_rtf/wavelet_filters.htm" />
+  <mapID target="Averaging_Filters" url="analysistoolshelpfile_rtf/averaging_filters.htm" />
+  <mapID target="Defined_by_input_number_of_adjacent_points" url="analysistoolshelpfile_rtf/defined_by_input_number_of_adjacent_points.htm" />
+  <mapID target="Defined_by_input_number_of_subintervals" url="analysistoolshelpfile_rtf/defined_by_input_number_of_subintervals.htm" />
+  <mapID target="Tuning" url="analysistoolshelpfile_rtf/tuning.htm" />
+  <mapID target="Multivalued_spectra_averaging" url="analysistoolshelpfile_rtf/multivalued_spectra_averaging.htm" />
+  <mapID target="Re_binning" url="analysistoolshelpfile_rtf/re_binning.htm" />
+  <mapID target="Reject_Zero_and_negative_flux_values" url="analysistoolshelpfile_rtf/reject_zero_and_negative_flux_values.htm" />
+  <mapID target="Mirroring" url="analysistoolshelpfile_rtf/mirroring.htm" />
+  <mapID target="Line_Mirroring" url="analysistoolshelpfile_rtf/line_mirroring.htm" />
+  <mapID target="Spectrum_Mirroring" url="analysistoolshelpfile_rtf/spectrum_mirroring.htm" />
+  <mapID target="Flux" url="analysistoolshelpfile_rtf/flux.htm" />
+  <mapID target="Line_Flux" url="analysistoolshelpfile_rtf/line_flux.htm" />
+  <mapID target="Integrated_Flux" url="analysistoolshelpfile_rtf/integrated_flux.htm" />
+</map>

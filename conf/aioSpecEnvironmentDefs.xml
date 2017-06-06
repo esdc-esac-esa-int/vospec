@@ -1,0 +1,25 @@
+<?xml version="1.0"?> 
+<!DOCTYPE aioSpecEnvironmentDefs SYSTEM "aioSpecEnvironmentDefs.dtd">
+
+<aioSpecEnvironmentDefs> 
+		
+  <property name="SERVERHOST"           	value="@INSTALLATION_HOST@"/>
+  <property name="SERVERNAME"         		value="@SERVER_NAME@"/> 
+  <property name="SERVERPORT"         		value="@PORT@"/> 
+  <property name="RMIPORT"         		value="@RMI_PORT@"/>      
+  <property name="RMIPORT_DYNAMIC_MIN"         	value="1099"/>      
+  <property name="RMIPORT_DYNAMIC_MAX"         	value="1099"/>      
+  <property name="REGISTRYESAVOURL"         	value="http://registry.euro-vo.org/services/RegistrySearch"/>
+  <property name="REGISTRYNVOURL"         	value="http://nvo.stsci.edu/vor10/NVORegInt.asmx"/>
+  <property name="REGISTRYNVOURLMIRROR"         value="http://nvo.stsci.edu/vor10/NVORegInt.asmx"/>
+
+  <property name="SSAPURL"                      value="http://@INSTALLATION_HOST@:@PORT@/vospec/conf/SSAPVOTable.xml"/>
+  <property name="SSAPV0_97"         		value="http://@INSTALLATION_HOST@:@PORT@/vospec/SSAPv0_97List.xml"/>
+  <property name="TSAURL"         		value="http://@INSTALLATION_HOST@:@PORT@/vospec/conf/TsaListExample.xml"/>
+  <property name="SLAPURL"         		value="http://@INSTALLATION_HOST@:@PORT@/vospec/conf/SlapListExample.xml"/>
+  
+  <property name="SSAPPARAMETERS"         	value="http://@INSTALLATION_HOST@:@PORT@/vospec/conf/SSAPVersion.xml"/>            
+  <property name="VERSION"         		value="@VERSION@"/>      
+   
+</aioSpecEnvironmentDefs> 
+

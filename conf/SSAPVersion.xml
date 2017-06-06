@@ -1,0 +1,48 @@
+<?xml version="1.0"?> 
+<!DOCTYPE SSAPVersion SYSTEM "SSAPVersion.dtd">
+
+<SSAPVersion>
+  <property name="SSA_UCD_ACCESS"                   value="ACCESSREFERENCE"/>
+  <property name="SSA_UCD_TARGET"                   value="TITLE"/> 
+  <property name="SSA_UCD_RA"                       value="POS_EQ_RA_MAIN"/>      
+  <property name="SSA_UCD_DEC"                      value="POS_EQ_DEC_MAIN"/>      
+  <property name="SSA_UCD_AXIS"                     value="AXES"/>      
+  <property name="SSA_UCD_SCALEQ"                   value="SCALEQ"/> 
+  <property name="SSA_UCD_DIMEQ"                    value="DIMEQ"/> 
+  <property name="SSA_UCD_UNIT"                     value="UNITS"/>      
+  <property name="SSA_UCD_FORMAT"                   value="FORMAT"/> 
+  
+  <property name="SSA_ID_ACCESS"                    value="ACCESSREFERENCE"/>
+  <property name="SSA_ID_TARGET"                    value="TITLE"/> 
+  <property name="SSA_ID_RA"                        value="RA"/>      
+  <property name="SSA_ID_DEC"                       value="DEC"/>      
+  <property name="SSA_ID_AXIS"                      value="AXES"/>      
+  <property name="SSA_ID_SCALEQ"                    value="SCALEQ"/> 
+  <property name="SSA_ID_DIMEQ"                     value="DIMEQ"/> 
+  <property name="SSA_ID_UNIT"                      value="UNITS"/>      
+  <property name="SSA_ID_FORMAT"                    value="FORMAT"/>     
+  
+  <property name="SSA1.0_UTYPE_ACCESS"              value="ACCESS.REFERENCE"/>
+  <property name="SSA1.0_UTYPE_TARGET"              value="SPECTRUM.TARGET.NAME"/> 
+  <property name="SSA1.0_UTYPE_RA"                  value="CHAR.SPATIALAXIS.COVERAGE.LOCATION.VALUE"/>      
+  <property name="SSA1.0_UTYPE_DEC"                 value="CHAR.SPATIALAXIS.COVERAGE.LOCATION.VALUE"/>      
+  <property name="SSA1.0_UTYPE_SPECTRAL_NAME_AXIS"  value="CHAR.SPECTRALAXIS.NAME"/>      
+  <property name="SSA1.0_UTYPE_FLUX_NAME_AXIS"      value="CHAR.FLUXAXIS.NAME"/> 
+  <property name="SSA1.0_UTYPE_SPECTRALSI"          value="DATASET.SPECTRALSI"/> 
+  <property name="SSA1.0_UTYPE_FLUXSI"              value="DATASET.FLUXSI"/> 
+  <property name="SSA1.0_UTYPE_SPECTRAL_UNIT"       value="CHAR.SPECTRALAXIS.UNIT"/>      
+  <property name="SSA1.0_UTYPE_FLUX_UNIT"           value="CHAR.FLUXAXIS.UNIT"/>            
+  <property name="SSA1.0_UTYPE_FORMAT"              value="ACCESS.FORMAT"/>     
+  
+  <property name="SSA1.0_ID_ACCESS"                 value="REFERENCE"/>
+  <property name="SSA1.0_ID_TARGET"                 value="TARGET_NAME"/> 
+  <property name="SSA1.0_ID_RA"                     value="RA"/>      
+  <property name="SSA1.0_ID_DEC"                    value="DEC"/>      
+  <property name="SSA1.0_ID_SPECTRAL_NAME_AXIS"     value="SPECTRALNAMEAXIS"/>      
+  <property name="SSA1.0_ID_FLUX_NAME_AXIS"         value="FLUXNAMEAXIS"/> 
+  <property name="SSA1.0_ID_SPECTRALSI"             value="SPECTRALSI"/> 
+  <property name="SSA1.0_ID_FLUXSI"                 value="FLUXSI"/> 
+  <property name="SSA1.0_ID_SPECTRAL_UNIT"          value="SPECTRALUNITS"/>      
+  <property name="SSA1.0_ID_FLUX_UNIT"              value="FLUXUNITS"/>            
+  <property name="SSA1.0_ID_FORMAT"                 value="FORMAT"/>     
+</SSAPVersion> 

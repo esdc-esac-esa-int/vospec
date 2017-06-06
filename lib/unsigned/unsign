@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ ! $1 ]
+then
+    echo "Usage: unsign.sh <jarfile>"
+    exit
+fi
+
+curdir=`pwd`
+d="tmp-$1"
+mkdir -p $d
+cd $d
+unzip -q ../$1
+
+cd META-INF
+rm -f *.DSA *.RSA *.SF
+
+egrep -v "^Name: .*$" MANIFEST.MF | egrep -v "^SHA1-Digest:.*$" |  egrep -v "^\s*$" > NEW_MANIFEST.MF
+mv NEW_MANIFEST.MF MANIFEST.MF
+
+cd ..
+zip -qr $1 .
+
+cd ..
+mv $d/$1 $1
+rm -rf $d
+
+cd $curdir
+
+echo "$1 has been un-signed"

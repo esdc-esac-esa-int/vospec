@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2017 ESDC/ESA 2017
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<unitList>
+ <!-- Java supports unicode, no problem with Angstrom -->
+ <unit id="Angstrom" scaleq="1E-10" dimeq="L^+1">
+   <alias name="Angstroms"/>
+   <alias name="ANGSTROM"/>
+   <alias name="ANGSTROMS"/>
+   <alias name="angstrom"/>
+   <alias name="angstroms"/>   
+   <alias name="Å"/>   
+   <alias name="A"/>
+   <alias name="Ang"/>
+   <alias name="ang"/>
+ </unit> 
+ <unit id="Ampere" scaleq="1.0" dimeq="A^+1">
+   <alias name="ampere"/>
+   <alias name="amperes"/>
+   <alias name="Ampere"/>
+   <alias name="Amperes"/>
+   <alias name="AMPERE"/>
+   <alias name="AMPERES"/>
+ </unit> 
+ <unit id="C" scaleq="1.0" dimeq="A^+1T^+1">
+   <alias name="Coulomb"/>
+   <alias name="Coulombs"/>
+   <alias name="coulomb"/>
+   <alias name="coulombs"/>
+   <alias name="COULOMB"/>
+   <alias name="COULOMBS"/>
+ </unit>  
+ <unit id="Crab" scaleq="2E-11" dimeq="M^+1T^-3">
+   <alias name="crab"/>
+   <alias name="crabs"/>
+   <alias name="Crabs"/>
+   <alias name="CRAB"/>
+   <alias name="CRABS"/>
+ </unit>   
+ <unit id="erg" scaleq="1E-7" dimeq="M^+1L^+2T^-2">
+   <alias name="ergios"/>
+   <alias name="ergs"/>
+   <alias name="Erg"/>
+   <alias name="Ergios"/>
+   <alias name="Ergs"/>
+   <alias name="ERG"/>
+   <alias name="ERGS"/>
+ </unit>
+ <unit id="eV" scaleq="1.6E-19" dimeq="M^+1L^+2T^-2"/>
+ <unit id="F" scaleq="1.0" dimeq="A^+2M^-1L^-2T^+4">
+   <alias name="Faraday"/>
+   <alias name="Faradays"/>
+   <alias name="faraday"/>
+   <alias name="faradays"/>
+   <alias name="FARADAY"/>
+   <alias name="FARADAYS"/>
+   <alias name="Farad"/>
+   <alias name="Farads"/>
+   <alias name="FARAD"/>
+   <alias name="FARADS"/>
+   <alias name="farad"/>
+   <alias name="farads"/>
+ </unit> 
+ <unit id="g" scaleq="1E-3" dimeq="M^+1"/>
+ <unit id="H" scaleq="1.0" dimeq="A^-2M^+1L^+2T^-2">
+   <alias name="Henry"/>
+   <alias name="Henrys"/>
+   <alias name="Henries"/>
+   <alias name="henry"/>
+   <alias name="henrys"/>
+   <alias name="henries"/>
+   <alias name="HENRY"/>
+   <alias name="HENRYS"/>
+   <alias name="HENRIES"/>
+ </unit> 
+ <unit id="Hz" scaleq="1.0" dimeq="T^-1">
+   <alias name="HZ"/>
+   <alias name="HZs"/>
+   <alias name="hz"/>
+   <alias name="hzs"/>
+   <alias name="Hertz"/>
+   <alias name="Hertzs"/>
+   <alias name="hertz"/>
+   <alias name="hertzs"/>
+   <alias name="HERTZ"/>
+   <alias name="HERTZS"/>
+ </unit>
+ <unit id="J" scaleq="1.0" dimeq="M^+1L^+2T^-2">
+   <alias name="Joule"/>
+   <alias name="Joules"/>
+   <alias name="joule"/>
+   <alias name="joules"/>
+   <alias name="JOULE"/>
+   <alias name="JOULES"/>
+   <alias name="Julio"/>
+   <alias name="Julios"/>
+   <alias name="JULIO"/>
+   <alias name="JULIOS"/>
+ </unit>
+ <unit id="Jy" scaleq="1E-26" dimeq="M^+1T^-2">
+  <alias name="JY"/>
+  <alias name="jy"/>
+  <alias name="Jansky"/>
+  <alias name="Janskys"/>
+  <alias name="Janskies"/>
+  <alias name="jansky"/>
+  <alias name="janskys"/>
+  <alias name="janskies"/>
+  <alias name="JANSKY"/>
+  <alias name="JANSKYS"/>
+  <alias name="JANSKIES"/>
+ </unit>
+ <unit id="K" scaleq="1.0" dimeq="K^+1">
+  <alias name="Kelvin"/>
+  <alias name="Kelvins"/>
+  <alias name="kelvin"/>
+  <alias name="kelvins"/>
+  <alias name="KELVIN"/>
+  <alias name="KELVINS"/>
+ </unit> 
+ <unit id="m" scaleq="1.0" dimeq="L^+1"/> 
+ <unit id="micron" scaleq="1E-6" dimeq="L^+1"> 
+  <alias name="Micron"/>
+  <alias name="MICRON"/>
+  <alias name="Micrometer"/> 
+  <alias name="Micrometre"/> 
+  <alias name="micrometer"/>  
+  <alias name="micrometre"/>
+  <alias name="MICROMETER"/>
+  <alias name="MICROMETRE"/>
+  <alias name="microns"/>
+  <alias name="Microns"/>
+  <alias name="MICRONS"/>
+  <alias name="Micrometers"/>
+  <alias name="Micrometres"/>
+  <alias name="micrometers"/>
+  <alias name="micrometres"/>
+  <alias name="MICROMETERS"/>
+  <alias name="MICROMETRES"/>
+ </unit>  
+ <unit id="N" scaleq="1.0" dimeq="M^+1L^+1T^-2">
+   <alias name="n"/>
+   <alias name="Newton"/>
+   <alias name="Newtons"/>
+   <alias name="NEWTON"/>
+   <alias name="NEWTONS"/>
+   <alias name="newton"/>
+   <alias name="newtons"/>
+ </unit> 
+ <unit id="Ohm" scaleq="1.0" dimeq="A^-2M^+1L^+2T^-3"> 
+  <alias name="ohm"/>
+  <alias name="OHM"/>
+ </unit>
+ <unit id="Pa" scaleq="1.0" dimeq="M^+1L^-1T^-2"/>
+ <unit id="photon" scaleq="1.0" dimeq="M^+0L^+0T^+0"> 
+  <alias name="Photon"/>
+  <alias name="Photons"/>
+  <alias name="photons"/>
+  <alias name="PHOTONS"/>
+ </unit> 
+ <unit id="s" scaleq="1.0" dimeq="T^+1">
+  <alias name="second"/> 
+  <alias name="seconds"/> 
+  <alias name="sec"/> 
+  <alias name="Second"/> 
+  <alias name="Seconds"/> 
+  <alias name="Sec"/>
+  <alias name="SECOND"/> 
+  <alias name="SECONDS"/> 
+  <alias name="SEC"/>
+ </unit>
+ <unit id="S" scaleq="1.0" dimeq="A^+2M^-1L^-2T^+3">
+  <alias name="Siemens"/>
+  <alias name="siemens"/>
+  <alias name="SIEMENS"/>
+ </unit>
+ <unit id="T" scaleq="1.0" dimeq="A^-1M^-1T^-2">
+   <alias name="Tesla"/>
+   <alias name="tesla"/>
+   <alias name="TESLA"/>
+ </unit>
+ <unit id="V" scaleq="1.0" dimeq="A^-1M^+1L^+2T^-3">
+   <alias name="Volt"/>
+   <alias name="Volts"/>
+   <alias name="volt"/>
+   <alias name="volts"/>
+   <alias name="VOLT"/>
+   <alias name="VOLTS"/>
+ </unit> 
+ <unit id="W" scaleq="1.0" dimeq="M^+1L^+2T^-3">
+  <alias name="Watt"/>
+  <alias name="Watts"/>
+  <alias name="watt"/>
+  <alias name="watts"/>
+  <alias name="WATT"/>
+  <alias name="WATTS"/>
+ </unit> 
+ <unit id="Wb" scaleq="1.0" dimeq="A^-1M^+1L^+2T^-2">
+  <alias name="WB"/>
+  <alias name="Weber"/>
+  <alias name="Webers"/>
+  <alias name="weber"/>
+  <alias name="webers"/>
+  <alias name="WEBER"/>
+  <alias name="WEBERS"/>
+ </unit>  
+</unitList>

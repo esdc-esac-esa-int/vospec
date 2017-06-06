@@ -1,0 +1,124 @@
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#006699" vlink="#0000FF">
+<table width="700" border="0" align="center" cellpadding="10" bgcolor="#FFFFFF">
+  <tr>
+    <td><font color="#000000" size="6" face="Times New Roman, Times, serif"><strong>
+      How to access VOSpec</strong></font><font color="#000000" size="5" face="Times New Roman, Times, serif">
+      &nbsp; </font> <br> <br>
+      <hr>
+      <H3>Table of contents</H3>
+      <OL TYPE=1>
+        <LI> <A CLASS=SMALL HREF="#q1"><B>Query SSAP Services and Open VOSpec
+          directly from URL</B></A>
+        <LI> <A CLASS=SMALL HREF="#q3"><B>Open VOSpec as a standalone version
+          (webstart)</B></A>
+        <LI> <A CLASS=SMALL HREF="#q4"><B>Plastic functionalities</B></A>
+        <!--<LI> <A CLASS=SMALL HREF="#q5"><B>How to integrate VOSpec in your application</B></A> -->
+          <br>
+          <br>
+      </OL>
+      <hr>
+      <p><font size="4" face="Times New Roman, Times, serif"><strong> <A NAME="q1">Query
+        SSAP Services and Open VOSpec directly from URL</A></strong></font></p>
+      <p><font size="3" face="Times New Roman, Times, serif">VOSpec can be accessed
+      from a URL using a simple HTML form: <br>
+      <a href="http://@INSTALLATION_HOST@:@PORT@/vospec/formParameter.html" target="_blank">http://@INSTALLATION_HOST@:@PORT@/vospec/formParameter.html</a><br>
+      <br>
+      <form method="post" action="http://@INSTALLATION_HOST@:@PORT@/vospec/jsp/openVOSpec.jsp">
+        <table>
+          <tr>
+            <th class="left">SSA Name1:</th>
+            <td class="left"> <input name="name1" value="AXIS-XMS"></td>
+            <th class="left">SSA Name2:</th>
+            <td class="left"><input name="name2"></td>
+            <th class="left">SSA Name3:</th>
+            <td class="left"><input name="name3"></td>
+          </tr>
+          <tr>
+            <th class="left">SSA Server1:</th>
+            <td class="left"><input name="server1" value="http://venus.ifca.unican.es:8080/SSAPXMS/?"></td>
+            <th class="left">SSA Server2:</th>
+            <td class="left"><input name="server2"></td>
+            <th class="left">SSA Server3:</th>
+            <td class="left"><input name="server3"></td>
+          </tr>
+          <tr>
+            <th class="left">POS (deg):</th>
+            <td class="left"> <input name="POS" value="330,-16"></td>
+            <td class="left"></td>
+            <td class="left"></td>
+          </tr>
+          <tr>
+            <th class="left">SIZE(deg):</th>
+            <td class="left"> <input name="SIZE" value=20></td>
+            <td class="left"></td>
+            <td class="left"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input type="Submit" Value="Submit"></td>
+            <td class="left"></td>
+            <td class="left"></td>
+          </tr>
+        </table>
+      </form>
+      </font></p> <p><font size="3" face="Times New Roman, Times, serif">or directly
+        tyiping the URL and providing the necessary parameters:<br>
+        <a href="http://@INSTALLATION_HOST@:@PORT@/vospec/jsp/openVOSpec.jsp?&server1=http://venus.ifca.unican.es:8080/SSAPXMS/?&name1=AXIS-XMS&POS=330,-16&SIZE=20" target="_blank"><font size="2">openVOSpec.jsp?&amp;server1=URLServer1&amp;name1=nameserver&amp;server2=URLServer2&amp;name2=name2&amp;POS=330,-16&amp;SIZE=20</font></a></font></p>
+      <p><font size="3" face="Times New Roman, Times, serif">where: </font></p>
+      <p><font size="3" face="Times New Roman, Times, serif">- server1, server2
+        etc. DO have to appear as such in the URL<br>
+        - name1, name2 etc. are optional names for the services<br>
+        - and POS and SIZE are the standard input parameters for SSAP.</font></p>
+      <p><font size="3" face="Times New Roman, Times, serif">(click on the URL,
+        in this particular case ISO has been taken as example).</font></p>
+      <hr>
+      <p><font size="3" face="Times New Roman, Times, serif"> </font><font size="4" face="Times New Roman, Times, serif">
+        <strong><A NAME="q3">Open VOSpec as a standalone version (webstart)</a></strong></font></p>
+      <p><font size="3" face="Times New Roman, Times, serif">VOSpec can be downloaded
+        as a Desktop application from the following URL:<br>
+        <br>
+        <a href="http://@INSTALLATION_HOST@:@PORT@/webstart/VOSpec.jnlp" target="_blank">http://@INSTALLATION_HOST@:@PORT@/webstart/VOSpec.jnlp</a></font></p>
+      <hr>
+
+      <p><font size="3" face="Times New Roman, Times, serif"> </font><font size="4" face="Times New Roman, Times, serif">
+        <strong><A NAME="q3">Open a local file</a></strong></font></p>
+      <p><font size="3" face="Times New Roman, Times, serif">The following URL has to be called supplying a fileName parameter<br>
+        <br>
+        <a href="http://@INSTALLATION_HOST@:@PORT@/vospec/jsp/openSpectrum.jsp?fileName=/path" target="_blank">http://@INSTALLATION_HOST@:@PORT@/vospec/jsp/openSpectrum.jsp?fileName=/path</a></font></p>
+      <hr>
+
+
+      
+      <p><font size="4" face="Times New Roman, Times, serif"><strong><A NAME="q4">VO Interoperability
+        capabilities</a></strong></font></p>
+      <p><font size="3" face="Times New Roman, Times, serif">VOSpec implements
+        The VO interoperability protocol PLASTIC<br><br>
+	Supported Messages:<br>
+	<br>"ivo://votech.org/votable/load";
+        <br>"ivo://votech.org/votable/loadFromURL";
+        <br>"ivo://votech.org/spectrum/loadFromURL";
+    	<br>"ivo://votech.org/spectrum/load";
+
+        </font></p>
+
+      <p><font size="3" face="Times New Roman, Times, serif">VOSpec implements
+        The VO interoperability protocol SAMP<br><br>
+	Supported Messages:<br>
+	<br>"spectrum.load.ssa-generic";
+
+        </font></p>
+      
+      </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>

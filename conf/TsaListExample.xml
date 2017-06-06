@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!DOCTYPE VOTABLE SYSTEM "http://us-vo.org/xml/VOTable.dtd">
+<VOTABLE version="1.0">
+<RESOURCE type="results">
+<DESCRIPTION>
+Theoretical Spectra Access Services
+</DESCRIPTION>
+<INFO name="QUERY_STATUS" value="OK" />
+<TABLE>
+<FIELD ID="Title" ucd="VOX:Image_Title" datatype="char" arraysize="*"/>
+<FIELD ID="URL" ucd="DATA_LINK" datatype="char" arraysize="*"/>
+<DATA>
+<TABLEDATA>
+<TR>
+<TD>
+SVO: ATLAS9 Kurucz ODFNEW/NOVER models (Castelli et al.)
+</TD>
+<TD>
+<![CDATA[http://svo.cab.inta-csic.es/projects/svo/theory/db2vo/html/tsap.php?model=kurucz&FORMAT=METADATA]]>
+</TD>
+</TR>
+<TR>
+<TD>
+PGos3:VO-Mexico Model:Sternberg
+</TD>
+<TD>
+<![CDATA[http://ov.inaoep.mx/tsap/tsap.php?model=Sternberg&FORMAT=METADATA]]>
+</TD>
+</TR>
+<TR>
+<TD>
+PGos3:VO-Mexico Model:UCL
+</TD>
+<TD>
+<![CDATA[http://ov.inaoep.mx/tsap/tsap.php?model=UCL&FORMAT=METADATA]]>
+</TD>
+</TR>
+<TR>
+<TD>
+VO-Paris: PEGASE.HR synthetic spectra 
+</TD>
+<TD>
+<![CDATA[http://voparis-srv.obspm.fr/cgi-bin/pegasehr.pl?&run=1&format=metadata]]>
+</TD>
+</TR>
+<TR>
+<TD>
+SVO: Models of irradiated accretion disks around PMS stars (D' Alessio et al)
+</TD>
+<TD>
+<![CDATA[http://svo.cab.inta-csic.es/projects/svo/theory/db2vo/html/tsap.php?model=dalessio&FORMAT=METADATA]]>
+</TD>
+</TR>
+<TR>
+<TD>
+PGos3: Evolutionary synthesis models
+</TD>
+<TD>
+<![CDATA[http://ov.inaoep.mx/tsap/SyntMod.php?FORMAT=METADATA]]>
+</TD>
+</TR>
+<TR>
+<TD>
+PGos3: X-ray service prototype
+</TD>
+<TD>
+<![CDATA[http://ov.inaoep.mx/tsap/X-rayphp.php?FORMAT=METADATA]]>
+</TD>
+</TR>
+<TR>
+<TD>
+SVO: Coelho Synthetic stellar library
+</TD>
+<TD>
+<![CDATA[http://svo.cab.inta-csic.es/theory/db2vo/html/tsap.php?model=Coelho&FORMAT=METADATA]]>
+</TD>
+</TR>
+<TR>
+<TD>
+SVO: PopStar evolutionary synthesis model </TD>
+<TD>
+<![CDATA[http://popstar.no-ip.org/popStar/ssap.jsp?format=metadata]]>
+</TD>
+</TR> 
+<TR>
+<TD>
+TMAP SSA service</TD>
+<TD>
+<![CDATA[http://vo.ari.uni-heidelberg.de/ssatr-0.01/ssatr?request=queryData&FORMAT=metadata]]>
+</TD>
+</TR>
+</TABLEDATA>
+</DATA>
+</TABLE>
+</RESOURCE>
+</VOTABLE>
+

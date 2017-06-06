@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+" codebase="http://@INSTALLATION_HOST@:@PORT@/webstart/" href="VOSpec.jnlp">
+<information>
+<title>VOSpec</title>
+<vendor>ESAC</vendor>
+<homepage href="VOSpec.html"/>
+<description>Web start</description>
+<offline-allowed/>
+</information>
+<security>
+<all-permissions/>
+</security>
+<resources>
+<j2se version="1.4+"/>
+<jar href="VOSpec_Subversion.jar"/>
+<jar href="Jama-1.0.1.jar"/>
+<jar href="nom.jar"/>
+<jar href="swing-layout-1.0.jar"/>
+<jar href="org.jar"/>
+<jar href="ptolemy.plot.jar"/>
+<jar href="plastic.jar"/>
+<jar href="SEDLib_1.2_run.jar"/>
+<jar href="esavo-units-parser-1.2.jar"/>
+<jar href="jh.jar"/>
+<jar href="jsamp-1.0.jar"/>
+<jar href="stil.jar"/>
+<jar href="soap.jar"/>
+<jar href="cds-savot-3.0.jar"/>
+<jar href="regionMatcher.jar"/>
+<jar href="swingx-0.9.5.jar"/>
+<jar href="absi-cl-samp-module-0.2.2.jar"/>
+
+
+<param name="SERVERHOST" 	value="@INSTALLATION_HOST@"/>
+<param name="RMIPORT" 		value="1099"/>
+<param name="SERVERNAME" 	value="AioSpecServer"/>
+</resources>
+<application-desc main-class="esavo.vospec.main.AioSpecTool"/>
+</jnlp>

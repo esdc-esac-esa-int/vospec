@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE index PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Index Version 1.0//EN" "http://java.sun.com/products/javahelp/index_1_0.dtd">
+<index version="1.0">
+ <indexitem text="Adaptive Filters" target="Adaptive_Filters" />
+ <indexitem text="Averaging Filters" target="Averaging_Filters" />
+ <indexitem text="Best Fit" target="Best_Fit" />
+ <indexitem text="Bisector" target="Bisector" />
+ <indexitem text="Black Body Fitting" target="Black_Body_Fitting" />
+ <indexitem text="Defined by input number of adjacent points" target="Defined_by_input_number_of_adjacent_points" />
+ <indexitem text="Defined by input number of subintervals" target="Defined_by_input_number_of_subintervals" />
+ <indexitem text="Equivalent Width" target="Equivalent_Width" />
+ <indexitem text="Filters" target="Filters" />
+ <indexitem text="Fitting Utilities" target="Fitting_Utilities" />
+ <indexitem text="Flux" target="Flux" />
+ <indexitem text="Gaussian Lorentzian Voigth Fitting" target="Gaussian_Lorentzian_Voigth_Fitting" />
+ <indexitem text="Integrated Flux" target="Integrated_Flux" />
+ <indexitem text="Kernel Filters" target="Kernel_Filters" />
+ <indexitem text="Line Flux" target="Line_Flux" />
+ <indexitem text="Line Mirroring" target="Line_Mirroring" />
+ <indexitem text="Mirroring" target="Mirroring" />
+ <indexitem text="Multivalued spectra averaging" target="Multivalued_spectra_averaging" />
+ <indexitem text="Polynomial Fitting" target="Polynomial_Fitting" />
+ <indexitem text="Re-binning" target="Re_binning" />
+ <indexitem text="Reject Zero and negative flux values" target="Reject_Zero_and_negative_flux_values" />
+ <indexitem text="Spectrum Mirroring" target="Spectrum_Mirroring" />
+ <indexitem text="Statistics" target="Statistics" />
+ <indexitem text="Tuning" target="Tuning" />
+ <indexitem text="VOSpeculator" target="VOSpeculator" />
+ <indexitem text="Wavelet Filters" target="Wavelet_Filters" />
+</index>

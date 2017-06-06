@@ -1,0 +1,7 @@
+<?xml encoding='US-ASCII'?>
+
+<!ELEMENT SSAPVersion (property*)>
+
+<!ELEMENT property (#PCDATA)>
+<!ATTLIST property name    CDATA   #REQUIRED>
+<!ATTLIST property value   CDATA   #REQUIRED>

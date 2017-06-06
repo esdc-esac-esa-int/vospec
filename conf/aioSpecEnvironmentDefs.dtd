@@ -1,0 +1,8 @@
+<?xml encoding='US-ASCII'?>
+
+<!ELEMENT aioSpecEnvironmentDefs (property*)>
+
+<!ELEMENT property (#PCDATA)>
+<!ATTLIST property name    CDATA   #REQUIRED>
+<!ATTLIST property value   CDATA   #REQUIRED>
+

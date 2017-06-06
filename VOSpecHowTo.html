@@ -1,0 +1,814 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-1">
+	<TITLE>VOSpec Tool For Handling VO Spectra through SSAP</TITLE>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+        <meta http-equiv="content-language" content="en">
+        <meta name="robots" content="all">
+        <meta name="description" lang="en" content="VOSPEC : how to use it">
+        <meta name="keywords" content="vospec,esac,esa,european space agency,ssap,dal,spectra,spectrum,dimensional equation,ivoa,work with spectra,display spectra,overlapping,graph,space,pedro osuna,jesus salgado,isa barbarisi,christophe arviset,villafranca,castillo,madrid,spain">
+
+</HEAD>
+<BODY LANG="en-GB" TEXT="#000000" LINK="#0000ff" VLINK="#800080" DIR="LTR">
+<H1 ALIGN=CENTER>VOSpec Tool For Handling VO Spectra through SSAP</H1>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<H2 LANG="en-US">HOW TO PUBLISH YOUR DATA THROUGH SSAP</H2>
+<P>&nbsp;</P>
+<P LANG="en-US">The procedure involves, basically, two steps:</P>
+<P>&nbsp;</P>
+<OL>
+	<LI><P><SPAN LANG="en-US">Create an SSAP server &ldquo;wrapping&rdquo;
+	your data</SPAN> 
+	</P>
+	<LI><P><SPAN LANG="en-US">Have your spectra in a format
+	understandable by the SSAP protocol</SPAN> 
+	</P>
+</OL>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<H3 LANG="en-US">1. SSAP Wrapper around your (remote access) data</H3>
+<P>&nbsp;</P>
+<P><SPAN LANG="en-US">Although there is no fixed specification for
+the SSAP yet, we give here the one we have been working with, which
+is a very simple and high level specification without too much
+detail. Only a very limited set of parameters is requested, among
+which is our dimensional analysis parameters from Osuna-Salgado (see
+presentation at the ADASS XIV at:
+<A HREF="http://adass.ipac.caltech.edu/Presentations/Tuesday/Osuna_O5_3.pdf">http://adass.ipac.caltech.edu/Presentations/Tuesday/Osuna_O5_3.pdf</A>
+for a brief description of these parameters. A more detailed
+description is on the way).</SPAN></P>
+<P>&nbsp;</P>
+<P LANG="en-US">In order to have your data available through SSAP,
+you have to build a URL service that accepts the parameters POS and
+SIZE as input. The format for the values is:</P>
+<P>&nbsp;</P>
+<P LANG="en-US"><B>POS=RA,DEC</B>, e.g.: POS=304,38</P>
+<P LANG="en-US"><B>SIZE=size</B>, e.g.: SIZE=1</P>
+<P>&nbsp;</P>
+<P LANG="en-US">The RA and DEC POSition are given in decimal degrees
+and the size is given in degrees (this is similar to the IVOA SIAP
+specification).</P>
+<P>&nbsp;</P>
+<P><SPAN LANG="en-US">The output of this query has to be a VOTable
+with pointers (CDATA) to your spectra (e.g., a URL like:
+<A HREF="http://&lt;yoururl&gt;/spectrum_010101.fits">http://&lt;yourURL&gt;/spectrum_010101.fits</A>).
+This is also very much like in the SIAP protocol. </SPAN>
+</P>
+<P>&nbsp;</P>
+<P LANG="en-US">The following is the part of the VOTable output file
+where the output FIELDs are specified. I have written a word MUST,
+SHOULD or OPTIONAL depending on whether the parameters are compulsory
+or not for the VOSpec to be able to work properly with the spectra.
+Those certainly compulsory are the dimensional parameters. The future
+SSAP specification will format them properly, but for the time being
+they should appear as follows: (the example following comes from our
+ISO SSAP service, hence the optional keywords like ObsId, etc.)</P>
+<P>&nbsp;</P>
+<TABLE WIDTH=735 BORDER=1 CELLPADDING=3 CELLSPACING=3>
+	<COL WIDTH=643>
+	<COL WIDTH=69>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=643>
+				<PRE>&lt;FIELD ID=&quot;ObsId&quot; ucd=&quot;OBS_ID&quot; datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</PRE>
+			</TD>
+			<TD WIDTH=69>
+				<PRE>OPTIONAL</PRE>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=643>
+				<PRE>&lt;FIELD ID=&quot;Reference&quot; ucd=&quot;DATA_LINK&quot; datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt; </PRE>
+			</TD>
+			<TD WIDTH=69>
+				<PRE><B>MUST</B></PRE>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=643>
+				<PRE>&lt;FIELD ID=&quot;Target_Name&quot; ucd=&quot;VOX:Image_Title&quot; datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt; </PRE>
+			</TD>
+			<TD WIDTH=69>
+				<PRE><B>MUST</B></PRE>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=643>
+				<PRE>&lt;FIELD ID=&quot;Start_Time&quot; ucd=&quot;VOX:OBS_START_TIME&quot; datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</PRE>
+			</TD>
+			<TD WIDTH=69>
+				<PRE>SHOULD</PRE>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=643>
+				<PRE>&lt;FIELD ID=&quot;End_Time&quot; ucd=&quot;VOX:OBS_END_TIME&quot; datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt; </PRE>
+			</TD>
+			<TD WIDTH=69>
+				<PRE>SHOULD</PRE>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=643>
+				<PRE>&lt;FIELD ID=&quot;RA&quot; ucd=&quot;POS_EQ_RA_MAIN&quot; datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</PRE>
+			</TD>
+			<TD WIDTH=69>
+				<PRE><B>MUST</B></PRE>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=643>
+				<PRE>&lt;FIELD ID=&quot;DEC&quot; ucd=&quot;POS_EQ_DEC_MAIN&quot; datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt; </PRE>
+			</TD>
+			<TD WIDTH=69>
+				<PRE><B>MUST</B></PRE>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=643>
+				<PRE>&lt;FIELD ID=&quot;AXES&quot; ucd=&quot;VOX:Spectrum_axes&quot; datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt; </PRE>
+			</TD>
+			<TD WIDTH=69>
+				<PRE><B>MUST</B></PRE>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=643>
+				<PRE>&lt;FIELD ID=&quot;UNITS&quot; ucd=&quot;VOX:Spectrum_units&quot; datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</PRE>
+			</TD>
+			<TD WIDTH=69>
+				<PRE>OPTIONAL</PRE>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=643>
+				<PRE>&lt;FIELD ID=&quot;DIMEQ&quot; ucd=&quot;VOX:Spectrum_dimeq&quot; datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</PRE>
+			</TD>
+			<TD WIDTH=69>
+				<PRE><B>MUST</B></PRE>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=643>
+				<PRE>&lt;FIELD ID=&quot;SCALEQ&quot; ucd=&quot;VOX:Spectrum_scaleq&quot; datatype=&quot;double&quot; arraysize=&quot;*&quot;/&gt;</PRE>
+			</TD>
+			<TD WIDTH=69>
+				<PRE><B>MUST</B></PRE>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=643>
+				<PRE>&lt;FIELD ID=&quot;FORMAT&quot; ucd=&quot;VOX:Spectrum_Format&quot; datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</PRE>
+			</TD>
+			<TD WIDTH=69>
+				<PRE><B>MUST</B></PRE>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<PRE STYLE="margin-bottom: 0.2in"></PRE><P>
+&nbsp;<SPAN LANG="en-US">the whole SSAP response VOTable for our
+service with a query like:</SPAN></P>
+<P>&nbsp;</P>
+<P><A HREF="http://ida.esac.esa.int:8080/aio/jsp/siap.jsp?POS=304,38&amp;size=0.2&amp;imagetype=spectrum"><SPAN LANG="en-US">http://ida.esac.esa.int:8080/aio/jsp/siap.jsp?POS=304,38&amp;size=0.2&amp;imagetype=spectrum</SPAN></A></P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P LANG="en-US">is as follows:</P>
+<P>&nbsp;</P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;?xml
+version=&quot;1.0&quot;?&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;!DOCTYPE
+VOTABLE SYSTEM &quot;http://us-vo.org/xml/VOTable.dtd&quot;&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;VOTABLE
+version=&quot;1.0&quot;&gt;</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in">&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;RESOURCE
+type=&quot;results&quot;&gt;</FONT></FONT></SPAN></P>
+<PRE STYLE="margin-bottom: 0.2in"> <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;DESCRIPTION&gt;</FONT></FONT></SPAN></PRE><P STYLE="margin-bottom: 0in">
+&nbsp;&nbsp;&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">ISO
+Spectrum Access Service</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/DESCRIPTION&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;INFO
+name=&quot;QUERY_STATUS&quot; value=&quot;OK&quot; /&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TABLE&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;FIELD
+ID=&quot;ObsId&quot; ucd=&quot;OBS_ID&quot; datatype=&quot;char&quot;
+arraysize=&quot;*&quot;/&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp; <SPAN STYLE="background: #ffff00"><SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;FIELD
+ID=&quot;Reference&quot; ucd=&quot;DATA_LINK&quot; datatype=&quot;char&quot;
+arraysize=&quot;*&quot;/&gt;</FONT></FONT></SPAN></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;FIELD
+ID=&quot;Target_Name&quot; ucd=&quot;VOX:Image_Title&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;FIELD
+ID=&quot;Start_Time&quot; ucd=&quot;VOX:OBS_START_TIME&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;FIELD
+ID=&quot;End_Time&quot; ucd=&quot;VOX:OBS_END_TIME&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;FIELD
+ID=&quot;RA&quot; ucd=&quot;POS_EQ_RA_MAIN&quot; datatype=&quot;char&quot;
+arraysize=&quot;*&quot;/&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;FIELD
+ID=&quot;DEC&quot; ucd=&quot;POS_EQ_DEC_MAIN&quot; datatype=&quot;char&quot;
+arraysize=&quot;*&quot;/&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp; <SPAN STYLE="background: #ffff00"><SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;FIELD
+ID=&quot;AXES&quot; ucd=&quot;VOX:Spectrum_axes&quot; datatype=&quot;char&quot;
+arraysize=&quot;*&quot;/&gt;</FONT></FONT></SPAN></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;FIELD
+ID=&quot;UNITS&quot; ucd=&quot;VOX:Spectrum_units&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp; <SPAN STYLE="background: #ffff00"><SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;FIELD
+ID=&quot;DIMEQ&quot; ucd=&quot;VOX:Spectrum_dimeq&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</FONT></FONT></SPAN></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp; <SPAN STYLE="background: #ffff00"><SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;FIELD
+ID=&quot;SCALEQ&quot; ucd=&quot;VOX:Spectrum_scaleq&quot;
+datatype=&quot;double&quot; arraysize=&quot;*&quot;/&gt;</FONT></FONT></SPAN></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp; <SPAN STYLE="background: #ffff00"><SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;FIELD
+ID=&quot;FORMAT&quot; ucd=&quot;VOX:Spectrum_Format&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</FONT></FONT></SPAN></SPAN></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;DATA&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TABLEDATA&gt;</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in">&nbsp;<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TR&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;18101531&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN STYLE="background: #00ffff"><SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;![CDATA[http://ida.esac.esa.int:8080/aio/jsp/product.jsp?obsno=18101531&amp;protocol=HTTP&amp;name=lsan&amp;level=Custom]]&gt;</FONT></FONT></SPAN></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;ISO
+LWS01&nbsp; Spectrum Target: P Cyg off&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;16-May-1996
+13:04:23&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;16-May-1996
+13:25:19&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;304.329889995&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;38.03143&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;<SPAN STYLE="background: #00ffff">LSANWAV
+LSANFLX</SPAN>&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;microns
+watts/cm^2/micron&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;<SPAN STYLE="background: #00ffff">L
+ML-1T-3</SPAN>&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;<SPAN STYLE="background: #00ffff">1.E-6
+1.E+10</SPAN>&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;<SPAN STYLE="background: #00ffff">spectrum/fits</SPAN>&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/TR&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/TABLEDATA&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/DATA&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/TABLE&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/RESOURCE&gt;</FONT></FONT></SPAN></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/VOTABLE&gt;</FONT></FONT></P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P LANG="en-US">where highlighted in yellow are the header
+declarations and in blue the corresponding data (for the only entry
+found in the ISO service matching the input parameters for that
+position and size).</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<H3 LANG="en-US">SSAP wrapper around your local data</H3>
+<P>&nbsp;</P>
+<P LANG="en-US">If you happen to have some local -or remote- data but
+do not have an SSAP service running and do not dear to build one, you
+can still wrap your data in an SSAP-VOTable like form, so that they
+can be seen in the VOSpec together with remotely available real SSAP
+service spectra. We provide, within the VOSpec tool, a &ldquo;Wrapper
+Creator&rdquo; that helps you in doing this. 
+</P>
+<P LANG="en-US">The process would be as follows: let&rsquo;s say you
+have some data available at your local directory at location:</P>
+<P>&nbsp;/home/posuna/IVOA/HD161796/spectrum</P>
+<P LANG="en-US">(the location of the files can equally be a URL)</P>
+<P>&nbsp;</P>
+<P LANG="en-US">And the spectra you want to show are called:</P>
+<P>&nbsp;</P>
+<P LANG="en-US" STYLE="margin-bottom: 0in">2mass_votable.xml 
+</P>
+<P LANG="en-US" STYLE="margin-bottom: 0in">BVRI_votable.xml 
+</P>
+<P LANG="en-US" STYLE="margin-bottom: 0in">IRAS_votable.xml 
+</P>
+<P LANG="en-US" STYLE="margin-bottom: 0in">psp10601706.fits</P>
+<P>&nbsp;</P>
+<P LANG="en-US">(note that three of them are VOTable spectra
+(including a photometry one) and one is a fits file).</P>
+<P><BR><BR>
+</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P LANG="en-US">then, you would build your wrapper SSAP file by
+invoking the WrapperCreator at the lower right 
+</P>
+<P LANG="en-US">corner of the VOSpec. 
+</P>
+<OL>
+	<LI><P LANG="en-US">Click on Wrapper Creator.</P>
+	<LI><P LANG="en-US">Introduce the wrapper filename (will be your
+	local SSAP wrapper filename).</P>
+	<LI><P LANG="en-US">Select one of the local (or remote) spectrum you
+	want to be able to display in VOSpec. For example, IRAS_votable.xml</P>
+	<LI><P LANG="en-US">Choose the file type. In this case, the file
+	corresponds to a VOTABLE spectrum, therefore choose VOTABLE.</P>
+	<LI><P LANG="en-US">Input the Wave name and the FLUX name of your
+	VOTABLE spectrum, e.g., &ldquo;WAVE&rdquo; and &ldquo;FLUX&rdquo;.
+	These are the names that correspond to your wavelength and flux
+	fileds in the votable respectively. See our IRAS_votable.xml
+	spectrum example below: 
+	</P>
+</OL>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;?xml
+version=&quot;1.0&quot;?&gt;</FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;!DOCTYPE
+VOTABLE SYSTEM &quot;http://us-vo.org/xml/VOTable.dtd&quot;&gt;</FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;VOTABLE
+&gt;&lt;RESOURCE &gt;&lt;TABLE name=&quot;tabel1&quot; &gt;</FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+unit=&quot;um&quot; datatype=&quot;float&quot; precision=&quot;6&quot;
+width=&quot;10&quot; name=&quot;<FONT COLOR="#800000">WAVE</FONT>&quot;
+/&gt;</FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+unit=&quot;Jy&quot; datatype=&quot;float&quot; precision=&quot;8&quot;
+width=&quot;20&quot; name=&quot;<FONT COLOR="#800000">FLUX</FONT>&quot;
+/&gt;</FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;DATA&gt;&lt;TABLEDATA&gt;&lt;TR&gt;&lt;TD&gt;12&lt;/TD&gt;&lt;TD&gt;6.12&lt;/TD&gt;&lt;/TR&gt;</FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TR&gt;&lt;TD&gt;25&lt;/TD&gt;&lt;TD&gt;184.0&lt;/TD&gt;&lt;/TR&gt;</FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;etc.&gt;
+</FONT>
+</P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/TABLEDATA&gt;&lt;/DATA&gt;&lt;/TABLE&gt;&lt;/RESOURCE&gt;</FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/VOTABLE&gt;</FONT></P>
+<OL START=6>
+	<LI><P><FONT SIZE=3>Now, to work out the Dimensional Equation, there
+	are pre-defined formulas for the most common units. If your units
+	happen to be among the predefined ones, select them. If not, please
+	feel the DIMEQ and SCALEQ parameters accordingly. In our case, and
+	according to the spectrum, the units are micrometers and Janskys,
+	and therefore will select them from the predefined ones.</FONT></P>
+	<LI><P><FONT SIZE=3>Click the &ldquo;Add&rdquo; button. The spectrum
+	entry will be added to the SSAP wrapper file.</FONT></P>
+	<LI><P><FONT SIZE=3>Repet the procedure 1. to 7. with another
+	spectrum. </FONT>
+	</P>
+	<LI><P><FONT SIZE=3>Once you have added all the necessary spectra,
+	click &ldquo;Save&rdquo; and your file will be created.</FONT></P>
+</OL>
+<P><FONT SIZE=3>The file will look like:</FONT></P>
+<P><FONT SIZE=1 STYLE="font-size: 8pt">&lt;VOTABLE
+version=&quot;1.0&quot;&gt;&lt;RESOURCE
+type=&quot;results&quot;&gt;&lt;DESCRIPTION&gt;SSAP
+Wrapper&lt;/DESCRIPTION&gt;&lt;TABLE&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;ImageTitle&quot; ucd=&quot;VOX:Image_Title&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot; /&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;RA&quot; ucd=&quot;POS_EQ_RA_MAIN&quot; datatype=&quot;double&quot;
+unit=&quot;deg&quot; /&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;DEC&quot; ucd=&quot;POS_EQ_DEC_MAIN&quot; datatype=&quot;double&quot;
+unit=&quot;deg&quot; /&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;AXES&quot; ucd=&quot;VOX:Spectrum_axes&quot; datatype=&quot;char&quot;
+arraysize=&quot;*&quot;/&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;UNITS&quot; ucd=&quot;VOX:Spectrum_units&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot; /&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;DIMEQ&quot; ucd=&quot;VOX:Spectrum_dimeq&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot; /&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;SCALEQ&quot; ucd=&quot;VOX:Spectrum_scaleq&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot; /&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;FORMAT&quot; ucd=&quot;VOX:Spectrum_format&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot; /&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;Spectrum&quot; ucd=&quot;DATA_LINK&quot; datatype=&quot;char&quot;
+arraysize=&quot;*&quot; /&gt;</FONT></P>
+<P><FONT SIZE=1 STYLE="font-size: 8pt">&lt;DATA&gt;&lt;TABLEDATA&gt;&lt;TR&gt;&lt;TD&gt;IRAS
+Photometry Data: HD 161796&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;
+&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;
+&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;WAVE
+FLUX&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;micron
+Jy&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;L
+MT-2&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;1E-6
+1.E-26&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;spectrum/votable&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;![CDATA[file:/home/posuna/IVOA/HD161796/spectrum/IRAS_votable.xml
+]]&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/TR&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TR&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;2MASS
+Photometry Data: HD 161796&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;
+&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;
+&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;
+&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;micron
+Jy&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;L
+MT-2&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;1E-6
+1E-26&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;spectrum/photometry&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;![CDATA[file:/home/posuna/IVOA/HD161796/spectrum/2mass_votable.xml
+]]&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/TR&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TR&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;BVRI
+Photometry Data: HD 161796&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;
+&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;
+&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;
+&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;micron
+Jy&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;L
+MT-2&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;1E-6
+1E-26&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;spectrum/photometry&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;![CDATA[file:/home/posuna/IVOA/HD161796/spectrum/BVRI_votable.xml
+]]&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/TR&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TR&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">ISO
+PHT HD 161796&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;
+&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;
+&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;LAMBDA
+FLUX_SPB&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;um
+w/m^2/um&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;L
+ML-1T-3&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;1.E-6
+1.E+6&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;spectrum/fits&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;![CDATA[file:/home/posuna/IVOA/HD161796/spectrum/psp10601706.fits]]&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/TD&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/TR&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/TABLEDATA&gt;&lt;/DATA&gt;&lt;/TABLE&gt;&lt;/RESOURCE&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/VOTABLE&gt;</FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P><FONT SIZE=3>Now, you will only have to click &ldquo;Go&rdquo; and
+&ldquo;Open Local data&rdquo; in the VOSpec, and load your SSAP
+wrapper file.</FONT></P>
+<P><BR><BR>
+</P>
+<H3 LANG="en-US">2. DATA IN VO FORMAT</H3>
+<P>&nbsp;</P>
+<P LANG="en-US">For the time being, VOSpec only accepts data in FITs
+binary tables and VOTable formats. If you have some data in ASCII
+with proper information, it should be very easy to convert them into
+VOTable. We will give an example below. If you have your data
+available in FITS binary tables, then you don&rsquo;t have to format
+them any further (you will have to give the AXES metadata so that
+VOSpec knows where to look at in the table to find the wavelength and
+flux columns).</P>
+<P>&nbsp;</P>
+<P LANG="en-US">So for the time being, VOSPec only understand simple
+&ldquo;two column&rdquo; spectra: one column for wavelength, and
+another one for flux. Whenever other more complex formats are agreed
+by the IVOA community, we will adapt the VOSpec to understand them.</P>
+<P>&nbsp;</P>
+<P LANG="en-US">Example: converting V4633 SGR data in ASCII format to
+VOTable (data from C. Venturini)</P>
+<P>&nbsp;</P>
+<P LANG="en-US">The data are in an ascii format as follows:</P>
+<P STYLE="margin-bottom: 0in">&nbsp;</P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">FILENAME:
+V4633_SGR_AUG1999.txt</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">SOURCE_NAME:
+NOVA SAGITTARII 1998</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">ALTERNATE_NAME:
+V4633 SGR</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">LEGEND_NAME:
+N SGR 1998 A</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">SOURCE_TYPE:
+NOVA</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">COORDINATE_1:
+RA: 18 21 40.47 (2000)</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">COORDINATE_2:
+DEC: -27 31 38.00 (2000)</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">LOCATION:
+LICK OBSERVATORY/MT. HAMILITON, CA</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">DATE:
+1999:08:31</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">INSTRUMENT:
+NIRIS</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">REFERENCE:
+LYNCH D. K., et al., Astron. J., 122(4):2013-2016 (2001)</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">WAVELENGTH_MIN:
+0.80</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">WAVELENGTH_MAX:
+2.48</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">WAVELENGTH
+units microns</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">YAXIS_UNITS:
+W CM-2 MICRON-1</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">BEAM_SIZE:
+2.7 ARCSEC</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">NUMBER_COLUMNS:
+2</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">LIBRARY_FLAG:
+9</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">Comments:</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=1 STYLE="font-size: 8pt">END</FONT></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<FONT SIZE=1 STYLE="font-size: 8pt">0.800400&nbsp;&nbsp;&nbsp;&nbsp;
+3.061E-18</FONT></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<FONT SIZE=1 STYLE="font-size: 8pt">0.800900&nbsp;&nbsp;&nbsp;&nbsp;
+3.079E-18</FONT></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<FONT SIZE=1 STYLE="font-size: 8pt">0.801400&nbsp;&nbsp;&nbsp;&nbsp;
+3.060E-18</FONT></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<FONT SIZE=1 STYLE="font-size: 8pt">0.801900&nbsp;&nbsp;&nbsp;&nbsp;
+2.926E-18</FONT></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<FONT SIZE=1 STYLE="font-size: 8pt">0.802400&nbsp;&nbsp;&nbsp;&nbsp;
+2.696E-18</FONT></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<FONT SIZE=1 STYLE="font-size: 8pt">0.802900&nbsp;&nbsp;&nbsp;&nbsp;
+2.716E-18</FONT></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<FONT SIZE=1 STYLE="font-size: 8pt">0.803400&nbsp;&nbsp;&nbsp;&nbsp;
+2.923E-18</FONT></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<FONT SIZE=1 STYLE="font-size: 8pt">0.803900&nbsp;&nbsp;&nbsp;&nbsp;
+2.898E-18</FONT></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<FONT SIZE=1 STYLE="font-size: 8pt">0.804400&nbsp;&nbsp;&nbsp;&nbsp;
+2.694E-18</FONT></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<FONT SIZE=1 STYLE="font-size: 8pt">0.804900&nbsp;&nbsp;&nbsp;&nbsp;
+2.495E-18</FONT></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<FONT SIZE=1 STYLE="font-size: 8pt">0.805400&nbsp;&nbsp;&nbsp;&nbsp;
+2.349E-18</FONT></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<FONT SIZE=1 STYLE="font-size: 8pt">0.805900&nbsp;&nbsp;&nbsp;&nbsp;
+2.344E-18</FONT></P>
+<P>&hellip;&hellip;<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">.</FONT></FONT></SPAN></P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P LANG="en-US">Then, we convert them to a VOTable as follows:</P>
+<P>&nbsp;</P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;?xml
+version=&quot;1.0&quot;?&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;!DOCTYPE
+VOTABLE SYSTEM &quot;http://us-vo.org/xml/VOTable.dtd&quot;&gt;</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in">&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;VOTABLE&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;DESCRIPTION&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">European
+Science Astronomy Center</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/DESCRIPTION&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;RESOURCE&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TABLE
+name=&quot;tabel1&quot;&nbsp; &gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;FIELD
+unit=&quot;um&quot;&nbsp; datatype=&quot;float&quot;&nbsp;
+precision=&quot;6&quot;&nbsp; width=&quot;10&quot;&nbsp; name=&quot;WAVE&quot;&nbsp;
+/&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;FIELD
+unit=&quot;Jy&quot;&nbsp; datatype=&quot;float&quot;&nbsp;
+precision=&quot;8&quot;&nbsp; width=&quot;20&quot;&nbsp; name=&quot;FLUX&quot;&nbsp;
+/&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;DATA&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TABLEDATA&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TR&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;0.800400&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;3.061E-18&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/TR&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TR&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;0.800900&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;3.079E-18&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/TR&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TR&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;0.801400&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;3.060E-18&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/TR&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TR&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;0.801900&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;2.926E-18&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&hellip;&hellip;<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">.</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;2.462700&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;TD&gt;2.534E-19&lt;/TD&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/TR&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/TABLEDATA&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/DATA&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/TABLE&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/RESOURCE&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;&nbsp; <SPAN LANG="en-US"><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New">&lt;/VOTABLE&gt;</FONT></FONT></SPAN></P>
+<P STYLE="margin-bottom: 0in">&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P LANG="en-US">The local VOTable SSAP &ldquo;wrapper&rdquo; of
+previous paragraph would contain the metadata extracted from the
+header of the ASCII file:</P>
+<P>&nbsp;</P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;?xml
+version=&quot;1.0&quot;?&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;!DOCTYPE
+VOTABLE SYSTEM &quot;http://us-vo.org/xml/VOTable.dtd&quot;&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;VOTABLE
+version=&quot;1.0&quot;&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;RESOURCE
+type=&quot;results&quot;&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;DESCRIPTION&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">Spectrum
+Access Service</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/DESCRIPTION&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;INFO
+name=&quot;QUERY_STATUS&quot; value=&quot;OK&quot; /&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TABLE&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;ObsId&quot; ucd=&quot;OBS_ID&quot; datatype=&quot;char&quot;
+arraysize=&quot;*&quot;/&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;Reference&quot; ucd=&quot;DATA_LINK&quot; datatype=&quot;char&quot;
+arraysize=&quot;*&quot;/&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;Target_Name&quot; ucd=&quot;VOX:Image_Title&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;Start_Time&quot; ucd=&quot;VOX:OBS_START_TIME&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;End_Time&quot; ucd=&quot;VOX:OBS_END_TIME&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;RA&quot; ucd=&quot;POS_EQ_RA_MAIN&quot; datatype=&quot;char&quot;
+arraysize=&quot;*&quot;/&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;DEC&quot; ucd=&quot;POS_EQ_DEC_MAIN&quot; datatype=&quot;char&quot;
+arraysize=&quot;*&quot;/&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;AXES&quot; ucd=&quot;VOX:Spectrum_axes&quot; datatype=&quot;char&quot;
+arraysize=&quot;*&quot;/&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;UNITS&quot; ucd=&quot;VOX:Spectrum_units&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;DIMEQ&quot; ucd=&quot;VOX:Spectrum_dimeq&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;SCALEQ&quot; ucd=&quot;VOX:Spectrum_scaleq&quot;
+datatype=&quot;double&quot; arraysize=&quot;*&quot;/&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;FIELD
+ID=&quot;FORMAT&quot; ucd=&quot;VOX:Spectrum_Format&quot;
+datatype=&quot;char&quot; arraysize=&quot;*&quot;/&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;DATA&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TABLEDATA&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TR&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;AEROSPACE
+Comp&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;![CDATA[file:/home/posuna/IVOA/data/CatherineVenturini/votable0AUG]]&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;V4633
+SGR&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;10-Feb-1997
+10:11:51&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;10-Feb-1997
+11:00:09&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;275.4&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;-27.52&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;WAVE
+FLUX&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;micron
+W/cm2/um&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;L
+ML-1T-3&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;1.E-6
+1E+10&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;spectrum/votable&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/TR&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TR&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;AEROSPACE
+Comp&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;![CDATA[file:/home/posuna/IVOA/data/CatherineVenturini/votable0JUL]]&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;V4633
+SGR&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;10-Feb-1997
+10:11:51&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;10-Feb-1997
+11:00:09&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;275.4&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;-27.52&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;WAVE
+FLUX&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;micron
+W/cm2/um&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;L
+ML-1T-3&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;1.E-6
+1E+10&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;TD&gt;spectrum/votable&lt;/TD&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/TR&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/TABLEDATA&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/DATA&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/TABLE&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/RESOURCE&gt;</FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=1 STYLE="font-size: 8pt">&lt;/VOTABLE&gt;</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in">&nbsp;</P>
+<P>&nbsp;</P>
+<P LANG="en-US">where only the MUST data from above specification are
+important (other data might be fake or even wrong, as the VOTable
+SSAP wrapper was taken from another SSA service and modified to suite
+the V4633 SGR case).</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P LANG="en-US">In this way, the data will be automatically plugged
+into the VOSpec and all VOSpec capabilities will be available.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P><SPAN LANG="en-US">Please send any comments or errors you might
+find in this brief HOWTO to <A HREF="mailto:Pedro.Osuna@esa.int">Pedro.Osuna@esa.int</A>.</SPAN></P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</BODY>
+</HTML>
